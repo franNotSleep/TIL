@@ -8,6 +8,12 @@ from core.post.models import Post
 
 
 class PostSerializer(AbstractSerializer):
+    """
+    Serializer class for the Post model, used to convert Post instances to and from Python primitives.
+    Includes custom validation for the author field, and converts the author ID to the corresponding
+    user's public ID when serializing Post instances.
+    """
+
     # Defining a SlugRelatedField for the author field that returns the user's public_id instead of user's id
     author = serializers.SlugRelatedField(
         slug_field="public_id", queryset=User.objects.all()
@@ -15,11 +21,16 @@ class PostSerializer(AbstractSerializer):
 
     def validate_author(self, res_author):
         """
-        Custom validation method for the author field.
+        Custom validation for the author field, ensuring that the requesting user is the same as the author.
 
-        Checks that the authenticated user making the request is the same as the author
-        of the post being created or updated. If they are not the same, a ValidationError
-        is raised with the message "You can't create a post for another user."
+        Args:
+            res_author (User): The author to validate.
+
+        Raises:
+            ValidationError: If the requesting user is not the same as the author.
+
+        Returns:
+            User: The validated author.
         """
         if self.context["request"].user != res_author:
             raise ValidationError("You can't create a post for another user.")
@@ -27,6 +38,17 @@ class PostSerializer(AbstractSerializer):
         return res_author
 
     def to_representation(self, instance):
+        """
+        Convert the given Post instance into a dictionary of primitive Python types.
+        Replaces the author id in the representation with the serialized author data.
+
+        Args:
+            instance (Post): The Post instance to convert.
+
+        Returns:
+            dict: A dictionary of primitive Python types representing the given Post instance,
+                  with the author id replaced by the serialized author data.
+        """
         representation = super().to_representation(instance)
 
         author_id = representation["author"]
@@ -38,9 +60,7 @@ class PostSerializer(AbstractSerializer):
 
     class Meta:
         """
-        Metadata class for the PostSerializer.
-
-        Defines the model and fields used by the serializer.
+        Meta class for the PostSerializer, defining the model and fields to include in the serialized output.
         """
 
         model = Post
