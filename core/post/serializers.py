@@ -19,12 +19,12 @@ class PostSerializer(AbstractSerializer):
         slug_field="public_id", queryset=User.objects.all()
     )
 
-    def validate_author(self, res_author):
+    def validate_author(self, data_author):
         """
         Custom validation for the author field, ensuring that the requesting user is the same as the author.
 
         Args:
-            res_author (User): The author to validate.
+            data_author (User): The author to validate.
 
         Raises:
             ValidationError: If the requesting user is not the same as the author.
@@ -32,10 +32,10 @@ class PostSerializer(AbstractSerializer):
         Returns:
             User: The validated author.
         """
-        if self.context["request"].user != res_author:
+        if self.context["request"].user != data_author:
             raise ValidationError("You can't create a post for another user.")
 
-        return res_author
+        return data_author
 
     def to_representation(self, instance):
         """
