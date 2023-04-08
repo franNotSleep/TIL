@@ -24,8 +24,6 @@ class LoginSerializer(TokenObtainPairSerializer):
         """
         # Call parent class method to validate user's login credentials and generate tokens.
         data = super().validate(attrs)
-        print("data: ")
-        print(data)
 
         # Generate refresh token using user's information.
         refresh = self.get_token(self.user)
