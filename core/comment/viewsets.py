@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework import status
+from core.permission.permission import AuthorOrReadOnly
 
 
 class CommentViewSet(AbstractViewSet):
@@ -15,7 +16,7 @@ class CommentViewSet(AbstractViewSet):
     """
 
     http_method_names = ("get", "post", "put", "delete")
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AuthorOrReadOnly,)
     serializer_class = CommentSerializer
 
     def get_queryset(self):

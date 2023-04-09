@@ -1,8 +1,9 @@
 from core.abstract.viewsets import AbstractViewSet
 from core.post.serializers import PostSerializer
 from core.post.models import Post
+from core.permission.permission import AuthorOrReadOnly
 
-from rest_framework.permissions import IsAuthenticated
+
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -23,7 +24,7 @@ class PostViewSet(AbstractViewSet):
     """
 
     http_method_names = ("get", "post", "put", "delete")
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AuthorOrReadOnly,)
     serializer_class = PostSerializer
 
     def get_queryset(self):
