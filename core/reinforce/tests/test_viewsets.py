@@ -2,14 +2,7 @@ from core.fixtures.user import user
 from core.fixtures.post import post
 from core.fixtures.reinforce import reinforce
 
-from PIL import Image
-
-import io
-
-import tempfile
-
 from rest_framework import status
-from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 class TestReinforceViewSet:
@@ -49,20 +42,11 @@ class TestReinforceViewSet:
         """
         client.force_authenticate(user=user)
 
-        # Create a test image
-        image = Image.new("RGB", (100, 100))
-
-        # Save the image to a temporary file
-        tmp_file = tempfile.NamedTemporaryFile(suffix=".jpg")
-        image.save(tmp_file)
-        tmp_file.seek(0)
-
         # Create the data to send in the POST request
         data = {
             "author": user.public_id,
             "post": post.public_id,
             "body": "simple body",
-            "photo": tmp_file,
             "source": "https://www.geeksforgeeks.org/urlfield-django-models/",
         }
 

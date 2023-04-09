@@ -158,7 +158,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "mediafiles")
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
