@@ -1,5 +1,5 @@
-import axios, { AxiosError } from 'axios';
-import createAuthRefreshInterceptor from 'axios-auth-refresh';
+import axios, { AxiosError } from "axios";
+import createAuthRefreshInterceptor from "axios-auth-refresh";
 
 export interface User {
   id: number;
@@ -9,7 +9,7 @@ export interface User {
   email: string;
   is_active: boolean;
   is_superuser: boolean;
-  bio: string | null;
+  bio: string | undefined;
 }
 
 interface AuthResponse {

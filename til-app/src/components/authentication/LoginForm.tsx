@@ -1,9 +1,16 @@
-import { LockIcon, UnlockIcon } from "@chakra-ui/icons";
-import { Box, Button, FormControl, Input, useToast } from "@chakra-ui/react";
-import axios from "axios";
-import { useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { LockIcon, UnlockIcon } from '@chakra-ui/icons';
+import { Box, Button, FormControl, Input, useToast } from '@chakra-ui/react';
+import axios from 'axios';
+import { useState } from 'react';
+import { Form, useNavigate } from 'react-router-dom';
 
+/**
+
+A form component for logging in users. It sends a POST request to the server with the user's
+email and password and stores the access and refresh tokens and user data in local storage if
+the login is successful. It displays success or error toast messages using Chakra UI.
+@returns A login form component with email and password input fields and a sign-in button.
+*/
 const LoginForm = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
