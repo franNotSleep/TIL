@@ -13,21 +13,13 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FcApproval, FcDisclaimer } from "react-icons/fc";
-import { Form, useNavigate } from "react-router-dom";
+import { Form } from "react-router-dom";
 
-interface InputError {
-  email?: string[];
-  username?: string[];
-  first_name?: string[];
-  last_name?: string[];
-  password?: string[];
-}
+import { InputError, useUserActions } from "../../hooks/user.actions";
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
   const toast = useToast();
   const [form, setForm] = useState({
     username: "",
@@ -41,9 +33,11 @@ const RegisterForm = () => {
 
   const [isDifferentPassword, setIsDifferentPassword] = useState(false);
   const [inputError, setInputError] = useState<InputError>();
+  const userActions = useUserActions();
 
   const [loading, setLoading] = useState(false);
 
+  // watch if both password are different
   useEffect(() => {
     if (form.password1 != form.password2) {
       setIsDifferentPassword(true);
@@ -52,6 +46,7 @@ const RegisterForm = () => {
     }
   }, [form.password1, form.password2]);
 
+  // handle change of inputs by his name
   const handleChange = (
     event:
       | React.ChangeEvent<HTMLInputElement>
@@ -84,49 +79,19 @@ const RegisterForm = () => {
       password: form.password1,
       first_name: form.first_name,
       last_name: form.last_name,
+      // This field can't be blank
       bio: !form.bio ? "No bio." : form.bio,
     };
 
-    axios
-      .post("http://localhost:8000/api/auth/register/", data)
-      .then((res) => {
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({
-            access: res.data.access,
-            refresh: res.data.refresh,
-            user: res.data.user,
-          })
-        );
-
-        toast({
-          title: "Logged In",
-          description: "Successfully",
-          status: "success",
-          duration: 6000,
-          icon: <FcApproval size="40px" />,
-          position: "top",
-        });
-
-        navigate("/");
-
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.data) {
-          setInputError(err.response.data);
-          toast({
-            title: err.message,
-            status: "error",
-            duration: 6000,
-            icon: <LockIcon />,
-            position: "top",
-          });
-        }
-
-        setLoading(false);
-      });
+    // Register user
+    // this manage: Display Toast, setInput Error, save user data, and send user to the home page
+    userActions.register(
+      data,
+      <FcApproval size="40px" />,
+      <FcDisclaimer size="40px" />,
+      setLoading,
+      setInputError
+    );
   };
   return (
     <Box p={5}>

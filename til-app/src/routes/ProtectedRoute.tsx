@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-import { User } from "../api/auth";
+import { User } from "../helpers/axios";
 
 type Props = {
   children: React.ReactNode;

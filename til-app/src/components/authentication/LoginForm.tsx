@@ -1,8 +1,9 @@
-import { LockIcon, UnlockIcon } from '@chakra-ui/icons';
-import { Box, Button, FormControl, Input, useToast } from '@chakra-ui/react';
-import axios from 'axios';
-import { useState } from 'react';
-import { Form, useNavigate } from 'react-router-dom';
+import { Box, Button, FormControl, Input } from "@chakra-ui/react";
+import { useState } from "react";
+import { FcApproval, FcDisclaimer } from "react-icons/fc";
+import { Form } from "react-router-dom";
+
+import { useUserActions } from "../../hooks/user.actions";
 
 /**
 
@@ -12,13 +13,12 @@ the login is successful. It displays success or error toast messages using Chakr
 @returns A login form component with email and password input fields and a sign-in button.
 */
 const LoginForm = () => {
-  const navigate = useNavigate();
+  const userActions = useUserActions();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const toast = useToast();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,43 +29,12 @@ const LoginForm = () => {
       password: form.password,
     };
 
-    axios
-      .post("http://localhost:8000/api/auth/login/", data)
-      .then((res) => {
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({
-            access: res.data.access,
-            refresh: res.data.refresh,
-            user: res.data.user,
-          })
-        );
-
-        toast({
-          title: "Logged In",
-          description: "Successfully",
-          status: "success",
-          duration: 6000,
-          icon: <UnlockIcon />,
-          position: "top",
-        });
-
-        navigate("/");
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err.message) {
-          toast({
-            title: err.message,
-            description: err.response.data.detail,
-            status: "error",
-            duration: 6000,
-            icon: <LockIcon />,
-            position: "top",
-          });
-        }
-        setLoading(false);
-      });
+    userActions.login(
+      data,
+      <FcApproval size="40px" />,
+      <FcDisclaimer size="40px" />,
+      setLoading
+    );
   };
   return (
     <Box>

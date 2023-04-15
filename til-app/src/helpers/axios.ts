@@ -1,18 +1,18 @@
 import axios, { AxiosError } from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 
+import { getUserData } from "../hooks/user.actions";
+
 export interface User {
   id: number;
   username: string;
   first_name: string;
   last_name: string;
   email: string;
-  is_active: boolean;
-  is_superuser: boolean;
   bio: string | undefined;
 }
 
-interface AuthResponse {
+export interface AuthResponse {
   access: string;
   refresh: string;
   user: User;
@@ -35,11 +35,9 @@ axiosService.interceptors.response.use(
 );
 
 axiosService.interceptors.request.use((config) => {
-  const { access }: AuthResponse = JSON.parse(
-    localStorage.getItem("auth") ?? "null"
-  );
-
   // Add authorization token to headers
+  const { access } = getUserData();
+
   if (access) {
     config.headers.Authorization = `Bearer ${access}`;
   }
@@ -57,9 +55,7 @@ export default axiosService;
  * @param failedRequest Axios error object from the failed request
  */
 const refreshAuthLogic = async (failedRequest: AxiosError) => {
-  const { refresh, user }: AuthResponse = JSON.parse(
-    localStorage.getItem("auth") ?? "null"
-  );
+  const { refresh, user } = getUserData();
   return axios
     .post(
       "/auth/refresh/",
