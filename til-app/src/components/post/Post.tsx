@@ -31,7 +31,7 @@ interface PropsPost {
 
 const Post = ({ post }: PropsPost) => {
   return (
-    <Card borderTop="8px" m="auto" borderColor="gray.400" maxW="lg" mb={10}>
+    <Card borderTop="8px" m="auto" borderColor="gray.400" maxW="3xl" mb={10}>
       <CardHeader>
         <Flex gap={5} alignItems="center">
           <Avatar />

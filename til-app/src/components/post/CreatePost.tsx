@@ -115,7 +115,13 @@ const CreatePost = ({ refresh }: PropsCreatePost) => {
 
   return (
     <Box>
-      <Card m="auto" p={5} mb={5} w={{ base: "100%", lg: "3xl" }}>
+      <Card
+        p={5}
+        m="auto"
+        my={5}
+        mb={5}
+        w={{ base: "100%", lg: "xl", xl: "2xl" }}
+      >
         <HStack>
           <Avatar src={"https://avatars.dicebear.com/api/male/username.svg"} />
           <Spacer />

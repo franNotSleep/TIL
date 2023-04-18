@@ -15,7 +15,7 @@ import {
 import { FcPrivacy } from "react-icons/fc";
 import { NavLink } from "react-router-dom";
 
-import { useUserActions } from "../../hooks/user.actions";
+import { useUserActions } from "../hooks/user.actions";
 
 const Navbar = () => {
   const userActions = useUserActions();
