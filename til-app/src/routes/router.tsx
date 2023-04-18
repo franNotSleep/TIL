@@ -13,18 +13,20 @@ import ProtectedRoute from "./ProtectedRoute";
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<RootLayout />}>
-        <Route
-          index
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/login/" element={<Login />} />
-        <Route path="/register/" element={<Register />} />
+      // Authenticated Route
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <RootLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Home />} />
       </Route>
+      // Allow Any
+      <Route path="/login/" element={<Login />} />
+      <Route path="/register/" element={<Register />} />
     </Route>
   )
 );

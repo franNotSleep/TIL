@@ -1,6 +1,8 @@
 from rest_framework import viewsets
+from rest_framework import filters
 
 
 class AbstractViewSet(viewsets.ModelViewSet):
-    ordering_field = ["created", "updated"]
+    filter_backends = [filters.OrderingFilter]
+    ordering_field = ["updated", "created"]
     ordering = ["-updated"]

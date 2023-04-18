@@ -11,6 +11,8 @@ export interface InputError {
   first_name?: string[];
   last_name?: string[];
   password?: string[];
+  body: string[];
+  title: string[];
 }
 
 interface RegisterUser extends Omit<User, "id"> {
@@ -124,8 +126,17 @@ export const useUserActions = () => {
       });
   }
 
-  function logout() {
+  function logout(toastSuccessIcon: React.ReactNode) {
     localStorage.removeItem("auth");
+    toast({
+      title: "Success",
+      description: "Successfully logged out",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+      icon: toastSuccessIcon,
+    });
     navigate("/login/");
   }
 };

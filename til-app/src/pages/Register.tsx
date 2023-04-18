@@ -1,4 +1,4 @@
-import { Avatar, Container, Heading, Text } from "@chakra-ui/react";
+import { Container, Heading, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -8,7 +8,14 @@ import images from "../constants/images";
 const Register = () => {
   return (
     <Container maxW="2xl" p={5} display="flex" flexDirection="column">
-      <Avatar src={images.lock} size="lg" verticalAlign="center" m="auto" />
+      <Image
+        src={images.lock}
+        boxSize="70px"
+        verticalAlign="center"
+        m="auto"
+        borderRadius="full"
+        alt="Lock"
+      />
 
       <Heading textAlign="center" as="h2" size="md">
         Sign Up

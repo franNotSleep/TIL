@@ -1,7 +1,7 @@
-import axios, { AxiosError } from "axios";
-import createAuthRefreshInterceptor from "axios-auth-refresh";
+import axios, { AxiosError } from 'axios';
+import createAuthRefreshInterceptor from 'axios-auth-refresh';
 
-import { getUserData } from "../hooks/user.actions";
+import { getUserData } from '../hooks/user.actions';
 
 export interface User {
   id: number;
@@ -22,7 +22,7 @@ export interface AuthResponse {
  * Create an instance of axios with default configurations.
  */
 const axiosService = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "http://localhost:8000/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -40,6 +40,7 @@ axiosService.interceptors.request.use((config) => {
 
   if (access) {
     config.headers.Authorization = `Bearer ${access}`;
+    // config.headers.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxNjkzMzc3LCJpYXQiOjE2ODE2OTMwNzcsImp0aSI6ImEwMzdhZDBlZWQ5MjRhZGY4MDM4Y2E3OGQwNjZlZGE5IiwidXNlcl9pZCI6NDh9.68MFYgsq2HzMack-f9lSSqfzdy-WAA8M079mko_s8vs`;
   }
 
   return config;
