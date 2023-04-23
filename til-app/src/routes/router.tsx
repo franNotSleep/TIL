@@ -7,6 +7,7 @@ import {
 import RootLayout from "../layout/RootLayout";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -23,6 +24,7 @@ export const router = createBrowserRouter(
         }
       >
         <Route index element={<Home />} />
+        <Route path="/profile/:profileId" element={<Profile />} />
       </Route>
       // Allow Any
       <Route path="/login/" element={<Login />} />

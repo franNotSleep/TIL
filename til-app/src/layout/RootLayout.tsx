@@ -1,19 +1,14 @@
-import { Grid, GridItem } from "@chakra-ui/react";
-import React from "react";
-import { Outlet } from "react-router-dom";
+import { Grid, GridItem } from '@chakra-ui/react';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 
 const RootLayout = () => {
   return (
     <Grid templateColumns="repeat(6, 1fr)">
-      <GridItem
-        bg="red"
-        minHeight="100%"
-        as="aside"
-        colSpan={{ base: 6, lg: 1 }}
-      >
+      <GridItem minHeight="100%" as="aside" colSpan={{ base: 6, lg: 1 }}>
         <Sidebar />
       </GridItem>
       <GridItem as="main" colSpan={{ base: 6, lg: 5 }}>

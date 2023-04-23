@@ -1,5 +1,6 @@
 import { Avatar, Box, Divider, Flex, Text } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 
 import { fetcher, User } from "../../helpers/axios";
@@ -32,8 +33,15 @@ interface PropsProfileItem {
   user: User;
 }
 const ProfileItem = ({ user }: PropsProfileItem) => {
+  const navigate = useNavigate();
+
+  const handleNavigateToProfile = () => {
+    navigate(`/profile/${user.id}`);
+  };
   return (
     <Flex
+      onClick={handleNavigateToProfile}
+      cursor={"pointer"}
       justifyContent={"flex-start"}
       borderBottomColor={"gray.500"}
       borderBottomWidth={"2px"}

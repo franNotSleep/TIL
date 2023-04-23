@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Textarea,
   useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -91,7 +92,7 @@ const EditPost = ({ isOpen, onClose, post, refresh }: PropsEditPost) => {
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Body</FormLabel>
-                <Input
+                <Textarea
                   value={form.body}
                   onChange={(e) => setForm({ ...form, body: e.target.value })}
                 />

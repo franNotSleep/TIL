@@ -1,7 +1,7 @@
-import axios, { AxiosError } from 'axios';
-import createAuthRefreshInterceptor from 'axios-auth-refresh';
+import axios, { AxiosError } from "axios";
+import createAuthRefreshInterceptor from "axios-auth-refresh";
 
-import { getUserData } from '../hooks/user.actions';
+import { getUserData } from "../hooks/user.actions";
 
 export interface User {
   id: number;
@@ -10,6 +10,8 @@ export interface User {
   last_name: string;
   email: string;
   bio: string | undefined;
+  updated: Date;
+  created: Date;
 }
 
 export interface AuthResponse {

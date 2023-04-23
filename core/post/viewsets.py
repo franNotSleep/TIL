@@ -15,6 +15,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+
 
 class PostViewSet(AbstractViewSet):
     """
@@ -26,6 +29,8 @@ class PostViewSet(AbstractViewSet):
     http_method_names = ("get", "post", "put", "delete")
     permission_classes = (AuthorOrReadOnly,)
     serializer_class = PostSerializer
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ["author__public_id"]
 
     def get_queryset(self):
         """

@@ -26,6 +26,7 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.10.0",
     "swr": "^2.1.2",
+    "timeago.js": "^4.0.0-beta.3",
     "ts-jest": "^29.1.0"
   },
   "devDependencies": {

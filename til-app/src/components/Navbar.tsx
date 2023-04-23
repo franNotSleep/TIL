@@ -9,9 +9,8 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Spacer,
-  Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { FcPrivacy } from "react-icons/fc";
 import { NavLink } from "react-router-dom";
 
@@ -20,10 +19,16 @@ import { getUserData, useUserActions } from "../hooks/user.actions";
 const Navbar = () => {
   const userActions = useUserActions();
   const { user } = getUserData();
+
   return (
-    <Flex bg="gray.100" p={5}>
-      <Heading>TIL</Heading>
-      <Spacer />
+    <Flex
+      bg="gray.100"
+      p={4}
+      justifyContent={{ base: "space-around", lg: "space-between" }}
+    >
+      <NavLink to="/">
+        <Heading>TIL</Heading>
+      </NavLink>
 
       <Menu>
         <MenuButton
@@ -53,14 +58,16 @@ const Navbar = () => {
           <br />
           <MenuDivider />
           <MenuItem>
-            <NavLink to="/profile/">
-              <Text>Profile</Text>
+            <NavLink to={`/profile/${user.id}`}>
+              <Button variant="link">Profile</Button>
             </NavLink>
           </MenuItem>
           <MenuItem
             onClick={() => userActions.logout(<FcPrivacy size="40px" />)}
           >
-            Logout
+            <Button variant="link" colorScheme="red">
+              Logout
+            </Button>
           </MenuItem>
         </MenuList>
       </Menu>
