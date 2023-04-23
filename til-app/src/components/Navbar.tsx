@@ -15,10 +15,11 @@ import {
 import { FcPrivacy } from "react-icons/fc";
 import { NavLink } from "react-router-dom";
 
-import { useUserActions } from "../hooks/user.actions";
+import { getUserData, useUserActions } from "../hooks/user.actions";
 
 const Navbar = () => {
   const userActions = useUserActions();
+  const { user } = getUserData();
   return (
     <Flex bg="gray.100" p={5}>
       <Heading>TIL</Heading>
@@ -47,7 +48,7 @@ const Navbar = () => {
           </Center>
           <br />
           <Center>
-            <p>Username</p>
+            <p>{user.username}</p>
           </Center>
           <br />
           <MenuDivider />

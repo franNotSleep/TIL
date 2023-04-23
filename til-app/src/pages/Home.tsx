@@ -19,7 +19,7 @@ const Home = () => {
         <Container maxW="2xl">
           {posts.isLoading == false ? (
             posts.data?.results.map((post: IPost) => (
-              <Post key={post.id} post={post} />
+              <Post key={post.id} post={post} refresh={posts.mutate} />
             ))
           ) : (
             <Center>

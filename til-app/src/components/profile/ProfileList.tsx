@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, HStack, Text } from "@chakra-ui/react";
+import { Avatar, Box, Divider, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 import useSWR from "swr";
 
@@ -15,9 +15,14 @@ const ProfileList = () => {
       flexDirection={"column"}
       borderRadius={"md"}
       p={5}
+      maxW={"md"}
+      borderWidth={"1px"}
     >
       {users.data?.results.map((user: User) => (
-        <ProfileItem user={user} key={user.id} />
+        <>
+          <ProfileItem user={user} key={user.id} />
+          <Divider mb={5} />
+        </>
       ))}
     </Box>
   );
@@ -28,14 +33,19 @@ interface PropsProfileItem {
 }
 const ProfileItem = ({ user }: PropsProfileItem) => {
   return (
-    <Flex justifyContent={"space-around"} mb={5}>
-      <HStack gap={2}>
-        <Avatar />
-        <Box>
-          <Text>{user.username}</Text>
-          <Text color="gray.200">{user.email}</Text>
-        </Box>
-      </HStack>
+    <Flex
+      justifyContent={"flex-start"}
+      borderBottomColor={"gray.500"}
+      borderBottomWidth={"2px"}
+      borderRadius={"full"}
+      borderWidth={"2px"}
+      overflow={"hidden"}
+    >
+      <Avatar />
+      <Box ml={1}>
+        <Text>{user.username}</Text>
+        <Text color={"CaptionText"}>{user.email}</Text>
+      </Box>
     </Flex>
   );
 };
