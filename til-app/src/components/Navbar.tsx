@@ -1,9 +1,12 @@
+import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Avatar,
+  Box,
   Button,
   Center,
   Flex,
   Heading,
+  IconButton,
   Menu,
   MenuButton,
   MenuDivider,
@@ -16,7 +19,12 @@ import { NavLink } from "react-router-dom";
 
 import { getUserData, useUserActions } from "../hooks/user.actions";
 
-const Navbar = () => {
+interface NavbarProps {
+  isOpen: boolean;
+  onOpen: () => void;
+}
+
+const Navbar = ({ isOpen, onOpen }: NavbarProps) => {
   const userActions = useUserActions();
   const { user } = getUserData();
 
@@ -26,9 +34,17 @@ const Navbar = () => {
       p={4}
       justifyContent={{ base: "space-around", lg: "space-between" }}
     >
-      <NavLink to="/">
-        <Heading>TIL</Heading>
-      </NavLink>
+      <IconButton
+        icon={<HamburgerIcon />}
+        aria-label="show sidebar"
+        onClick={onOpen}
+        display={{ base: "block", lg: "none" }}
+      />
+      <Box display={{ base: "block", lg: "none" }}>
+        <NavLink to="/">
+          <Heading>TIL</Heading>
+        </NavLink>
+      </Box>
 
       <Menu>
         <MenuButton

@@ -1,4 +1,4 @@
-import { EditIcon } from '@chakra-ui/icons';
+import { EditIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
@@ -19,16 +19,17 @@ import {
   Text,
   useDisclosure,
   useToast,
-} from '@chakra-ui/react';
-import React from 'react';
-import { AiOutlineDelete } from 'react-icons/ai';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { FaComment, FaHammer } from 'react-icons/fa';
-import { KeyedMutator } from 'swr';
+} from "@chakra-ui/react";
+import React from "react";
+import { AiOutlineDelete } from "react-icons/ai";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaHammer } from "react-icons/fa";
+import { KeyedMutator } from "swr";
 
-import axiosService, { User } from '../../helpers/axios';
-import { getUserData } from '../../hooks/user.actions';
-import EditPost from './EditPost';
+import axiosService, { User } from "../../helpers/axios";
+import { getUserData } from "../../hooks/user.actions";
+import Comment from "../comment/Comment";
+import EditPost from "./EditPost";
 
 export interface IPost {
   id: string;
@@ -77,10 +78,7 @@ const Post = ({ post, refresh }: PropsPost) => {
         </Button>
 
         <Spacer />
-
-        <Button leftIcon={<FaComment />} variant="ghost">
-          Comment 0
-        </Button>
+        <Comment />
       </CardFooter>
     </Card>
   );
