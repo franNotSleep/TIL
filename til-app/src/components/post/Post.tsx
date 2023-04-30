@@ -30,6 +30,7 @@ import Comment from "../comment/Comment";
 import EditPost from "./EditPost";
 import { format } from "timeago.js";
 import PostMenu from "./PostMenu";
+import Reinforce from "../reinforce/Reinforce";
 
 export interface IPost {
   id: string;
@@ -97,17 +98,7 @@ const Post = ({ post, refresh }: PropsPost) => {
           </Stack>
         </Stack>
         <Stack mt={8} direction={"row"} spacing={4}>
-          <Button
-            flex={1}
-            leftIcon={<FaHammer />}
-            fontSize={"sm"}
-            rounded={"full"}
-            _focus={{
-              bg: "gray.200",
-            }}
-          >
-            Reinforce
-          </Button>
+          <Reinforce currentPost={post} refresh={refresh} />
           <Comment currentPost={post} refresh={refresh} />
         </Stack>
       </Box>

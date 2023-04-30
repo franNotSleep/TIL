@@ -17,8 +17,10 @@ import {
   FiSettings,
   FiStar,
   FiTrendingUp,
+  FiUser,
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
+import { getUserData } from "../hooks/user.actions";
 
 interface LinkItemProps {
   name: string;
@@ -27,7 +29,7 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, link: "/" },
-  { name: "Trending", icon: FiTrendingUp, link: "#" },
+  { name: "Profile", icon: FiUser, link: "/profile/" },
   { name: "Explore", icon: FiCompass, link: "#" },
   { name: "Favourites", icon: FiStar, link: "#" },
   { name: "Settings", icon: FiSettings, link: "#" },
@@ -61,6 +63,8 @@ interface SidebarContentProps {
 }
 
 const SiderbarContent = ({ onClose }: SidebarContentProps) => {
+  const { user } = getUserData();
+
   return (
     <List spacing={5} fontSize="1.0em" p={4}>
       <NavLink to="/">
@@ -68,7 +72,10 @@ const SiderbarContent = ({ onClose }: SidebarContentProps) => {
       </NavLink>
       {LinkItems.map((item) => (
         <ListItem key={item.name}>
-          <NavLink to={item.link} onClick={onClose}>
+          <NavLink
+            to={item.link == "/profile/" ? "/profile/" + user.id : item.link}
+            onClick={onClose}
+          >
             <ListIcon as={item.icon} color="gray.500" />
             {item.name}
           </NavLink>

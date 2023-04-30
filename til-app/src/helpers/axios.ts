@@ -4,7 +4,7 @@ import createAuthRefreshInterceptor from "axios-auth-refresh";
 import { getUserData } from "../hooks/user.actions";
 
 export interface User {
-  id: number;
+  id: string;
   username: string;
   first_name: string;
   last_name: string;
