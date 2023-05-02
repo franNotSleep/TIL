@@ -171,6 +171,5 @@ CORS_ALLOWED_ORIGINS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Reflecting changes.
 # Default Avatar
 DEFAULT_AVATAR_URL = "https://api.dicebear.com/6.x/fun-emoji/svg?seed=Simon" 
