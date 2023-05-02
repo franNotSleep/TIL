@@ -48,8 +48,7 @@ interface PropsPost {
 
 const Post = ({ post, refresh }: PropsPost) => {
   const { user } = getUserData();
-
-  return (
+    return (
     <Center py={6}>
       <Box
         maxW={"4xl"}

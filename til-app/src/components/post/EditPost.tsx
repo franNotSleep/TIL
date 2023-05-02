@@ -29,7 +29,6 @@ interface PropsEditPost {
 
 const EditPost = ({ isOpen, onClose, post, refresh }: PropsEditPost) => {
   const toast = useToast();
-
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
