@@ -13,7 +13,6 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { FcPrivacy } from "react-icons/fc";
 import { NavLink } from "react-router-dom";
 
@@ -56,7 +55,7 @@ const Navbar = ({ isOpen, onOpen }: NavbarProps) => {
         >
           <Avatar
             size={"sm"}
-            src={"https://avatars.dicebear.com/api/male/username.svg"}
+            src={user.avatar}
           />
         </MenuButton>
         <MenuList alignItems={"center"}>
@@ -64,7 +63,7 @@ const Navbar = ({ isOpen, onOpen }: NavbarProps) => {
           <Center>
             <Avatar
               size={"2xl"}
-              src={"https://avatars.dicebear.com/api/male/username.svg"}
+              src={user.avatar}
             />
           </Center>
           <br />

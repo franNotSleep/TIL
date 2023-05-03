@@ -1,8 +1,9 @@
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from core.abstract.models import AbstractModel, AbstractManager
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
 from django.db import models
+
+def upload_to(instance, filename): 
+    return "images/{filename}".format(filename=filename)
 
 
 class UserManager(BaseUserManager, AbstractManager):
@@ -59,7 +60,8 @@ class User(AbstractModel, AbstractBaseUser):
     email = models.EmailField(db_index=True, unique=True)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
-    bio = models.TextField(null=True)
+
+    avatar = models.ImageField(null=True, blank=True, upload_to=upload_to)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]

@@ -1,9 +1,9 @@
-import { Box, Center, Spinner } from '@chakra-ui/react';
+import { Box, Center, Spinner, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
-
-import ProfileDetails from '../components/profile/ProfileDetails';
+import Post, { IPost } from '../components/post/Post';
+import ProfileCard from '../components/profile/ProfileCard';
 import ProfileTab from '../components/profile/ProfileTab';
 import { fetcher } from '../helpers/axios';
 
@@ -16,9 +16,15 @@ const Profile = () => {
     <Box>
       {user.isLoading == false && userPosts.isLoading == false ? (
         <>
-          <ProfileDetails user={user.data} />
-
-          <ProfileTab userPosts={userPosts.data} refresh={userPosts.mutate} user={user.data}/>
+          <ProfileCard user={user.data}/>
+          {/* POSTS PANEL */}
+          {userPosts.data.results.length === 0 ? (
+            <Text>No posts yet.</Text>
+          ) : (
+            userPosts.data.results.map((post: IPost) => (
+              <Post post={post} key={post.id} refresh={userPosts.mutate} />
+            ))
+          )}
         </>
       ) : (
         <Center>

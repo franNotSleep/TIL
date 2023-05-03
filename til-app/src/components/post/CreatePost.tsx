@@ -123,7 +123,7 @@ const CreatePost = ({ refresh }: PropsCreatePost) => {
         w={{ base: "100%", lg: "xl", xl: "2xl" }}
       >
         <HStack>
-          <Avatar src={"https://avatars.dicebear.com/api/male/username.svg"} />
+          <Avatar src={user.avatar} />
           <Spacer />
           <Input
             onClick={onOpen}
@@ -152,7 +152,7 @@ const CreatePost = ({ refresh }: PropsCreatePost) => {
 
             <HStack gap={5}>
               <Avatar
-                src={"https://avatars.dicebear.com/api/male/username.svg"}
+                src={user.avatar}
               />
               <Box>
                 <Text>{user.username}</Text>

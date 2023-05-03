@@ -9,9 +9,11 @@ export interface User {
   first_name: string;
   last_name: string;
   email: string;
-  bio: string | undefined;
   updated: Date;
   created: Date;
+  avatar: string;
+  posts_count: number;
+  reinforces_count: number;
 }
 
 export interface AuthResponse {

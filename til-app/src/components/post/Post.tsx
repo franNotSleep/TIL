@@ -1,19 +1,12 @@
-import { EditIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
-  Button,
-  Center,
   Heading,
   HStack,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Spacer,
   Stack,
   Text,
+  Center,
+  Spacer,
   useColorModeValue,
   useDisclosure,
   useToast,
@@ -89,7 +82,7 @@ const Post = ({ post, refresh }: PropsPost) => {
         </Stack>
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
-            src={"https://avatars0.githubusercontent.com/u/1164541?v=4"}
+            src={post.author.avatar}
           />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
             <Text fontWeight={600}>{post.author.username}</Text>

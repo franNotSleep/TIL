@@ -1,6 +1,6 @@
 import pytest
 
-from core.fixtures.user import user, user1
+from core.fixtures.user import user
 from core.post.models import Post
 from rest_framework import status
 

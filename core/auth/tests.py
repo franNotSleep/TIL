@@ -3,6 +3,8 @@ from rest_framework import status
 
 from core.fixtures.user import user
 
+from django.conf import settings
+
 
 class TestAuthenticationViewSet:
     endpoint = "/api/auth/"

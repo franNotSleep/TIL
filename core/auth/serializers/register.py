@@ -14,12 +14,12 @@ class RegisterSerializer(UserSerializer):
         # List of all the fields that can be included in a request or a response
         fields = [
             "id",
-            "bio",
             "email",
             "username",
             "first_name",
             "last_name",
             "password",
+            "avatar"
         ]
 
     def create(self, validate_data):

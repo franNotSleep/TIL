@@ -49,7 +49,7 @@ const ProfileItem = ({ user }: PropsProfileItem) => {
       borderWidth={"2px"}
       overflow={"hidden"}
     >
-      <Avatar />
+      <Avatar src={user.avatar}/>
       <Box ml={1}>
         <Text>{user.username}</Text>
         <Text color={"CaptionText"}>{user.email}</Text>

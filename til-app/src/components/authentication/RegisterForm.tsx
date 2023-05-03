@@ -26,7 +26,6 @@ const RegisterForm = () => {
     first_name: "",
     last_name: "",
     email: "",
-    bio: "",
     password1: "",
     password2: "",
   });
@@ -79,8 +78,6 @@ const RegisterForm = () => {
       password: form.password1,
       first_name: form.first_name,
       last_name: form.last_name,
-      // This field can't be blank
-      bio: !form.bio ? "No bio." : form.bio,
     };
 
     // Register user
@@ -204,7 +201,7 @@ const RegisterForm = () => {
         </HStack>
 
         <FormControl>
-          <FormLabel textColor="gray.500">Bio:</FormLabel>
+          <FormLabel textColor="gray.500">Avatar:</FormLabel>
           <Textarea
             placeholder="Tell us something about you."
             name="bio"
