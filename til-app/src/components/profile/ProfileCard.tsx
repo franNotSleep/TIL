@@ -30,6 +30,7 @@ const ProfileCard = ({ user }: ProfileCardProps) => {
     return n;
   }
 
+  console.log(user.avatar);
   return (
     <Center py={6}>
       <Box

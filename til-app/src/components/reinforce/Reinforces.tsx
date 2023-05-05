@@ -108,7 +108,7 @@ const ReinforceItem = ({
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <NavLink to={"/profile/" + reinforce.author.id}>
             <Avatar
-              src={"https://avatars0.githubusercontent.com/u/1164541?v=4"}
+              src={reinforce.author.avatar}
             />
           </NavLink>
 

@@ -149,7 +149,7 @@ const CommentItem = ({ comment, refresh, currentPost }: CommentItemProps) => {
       mb={2}
     >
       <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
-        <Avatar src={"https://avatars0.githubusercontent.com/u/1164541?v=4"} />
+        <Avatar src={comment.author.avatar} />
         <Stack direction={"column"} spacing={0} fontSize={"sm"}>
           <Text fontWeight={600}>{comment.author.username}</Text>
           <Text color={"gray.500"}>{format(comment.updated)}</Text>

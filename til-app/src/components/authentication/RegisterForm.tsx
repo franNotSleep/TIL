@@ -199,20 +199,6 @@ const RegisterForm = () => {
             </FormErrorMessage>
           </FormControl>
         </HStack>
-
-        <FormControl>
-          <FormLabel textColor="gray.500">Avatar:</FormLabel>
-          <Textarea
-            placeholder="Tell us something about you."
-            name="bio"
-            value={form.bio}
-            onChange={handleChange}
-          />
-          <FormHelperText color="gray.500">
-            This field is optional.
-          </FormHelperText>
-        </FormControl>
-
         <Button
           type="submit"
           my={10}

@@ -18,13 +18,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """
-        Return the list of users that the current user has permission to access.
-
-        Superusers can access all users, while regular users can only access non-superusers.
+        Return the list of users.
         """
-        if self.request.user.is_superuser:
-            return User.objects.all()
-        return User.objects.exclude(is_superuser=True)
+        return User.objects.all()
 
     def get_object(self):
         """

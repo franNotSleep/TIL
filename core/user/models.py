@@ -58,8 +58,6 @@ class User(AbstractModel, AbstractBaseUser):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(db_index=True, unique=True)
-    is_active = models.BooleanField(default=True)
-    is_superuser = models.BooleanField(default=False)
 
     avatar = models.ImageField(null=True, blank=True, upload_to=upload_to)
 
