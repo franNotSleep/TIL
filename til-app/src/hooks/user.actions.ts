@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AuthResponse, User } from "../helpers/axios";
+import axiosService, { AuthResponse, User } from "../helpers/axios";
 
 export interface InputError {
   email?: string[];
@@ -32,6 +32,7 @@ export const useUserActions = () => {
     login,
     register,
     logout,
+    updateUser,
   };
 
   /**
@@ -126,19 +127,58 @@ export const useUserActions = () => {
       });
   }
 
-  function logout(toastSuccessIcon: React.ReactNode) {
-    localStorage.removeItem("auth");
-    toast({
-      title: "Success",
-      description: "Successfully logged out",
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-      position: "top",
-      icon: toastSuccessIcon,
+function updateUser(
+  data: FormData,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+) {
+  const { user, refresh, access } = getUserData();
+  console.log([...data.entries()]);
+  return axiosService
+    .patch(`/user/${user.id}/`, data, {
+      headers: { "content-type": "multipart/form-data" },
+    })
+    .then((res) => {
+      setUserData({access, refresh, user: res.data});
+
+      toast({
+        title: "Success",
+        description: "Successfully updated",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err)
+      let errMsg = err.message.detail ? err.message.detail : err.message;
+      toast({
+        title: "Error",
+        description: errMsg,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      setLoading(false);
     });
-    navigate("/login/");
-  }
+}
+
+  
+function logout(toastSuccessIcon: React.ReactNode) {
+  localStorage.removeItem("auth");
+  toast({
+    title: "Success",
+    description: "Successfully logged out",
+    status: "error",
+    duration: 5000,
+    isClosable: true,
+    position: "top",
+    icon: toastSuccessIcon,
+  });
+  navigate("/login/");
+}
 };
 
 export function getUserData() {
