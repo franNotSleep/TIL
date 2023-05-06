@@ -19,6 +19,8 @@ import { KeyedMutator } from "swr";
 
 import axiosService from "../../helpers/axios";
 import { IPost } from "./Post";
+import { FormValues } from "./CreatePost";
+import { getUserData } from "../../hooks/user.actions";
 
 interface PropsEditPost {
   isOpen: boolean;
@@ -30,22 +32,26 @@ interface PropsEditPost {
 const EditPost = ({ isOpen, onClose, post, refresh }: PropsEditPost) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
+  const { user } = getUserData();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormValues>({
     title: post.title,
     body: post.body,
-    author: post.author,
+    photo: null
   });
 
   const onSubmit = () => {
     setLoading(true);
     const data = {
       title: form.title,
-      author: form.author.id,
+      author: user.id,
       body: form.body,
+      photo: form.photo,
     };
     axiosService
-      .put(`/post/${post.id}/`, data)
+      .put(`/post/${post.id}/`, data, {
+         headers: { "content-type": "multipart/form-data" },
+      })
       .then((res) => {
         // show success toast
         toast({
@@ -95,6 +101,17 @@ const EditPost = ({ isOpen, onClose, post, refresh }: PropsEditPost) => {
                   value={form.body}
                   onChange={(e) => setForm({ ...form, body: e.target.value })}
                 />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Photo</FormLabel>
+                <input 
+                  type="file" 
+                  name="photo" 
+                  onChange={event => {
+                    if (event.target.files)
+                      setForm({...form, photo: event.target.files[0]})
+                  }}
+                  />
               </FormControl>
             </Form>
           </ModalBody>

@@ -10,6 +10,7 @@ import {
   useColorModeValue,
   useDisclosure,
   useToast,
+  Image
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -30,6 +31,7 @@ export interface IPost {
   title: string;
   body: string;
   author: User;
+  photo?: string;
   created: Date;
   updated: Date;
 }
@@ -80,6 +82,8 @@ const Post = ({ post, refresh }: PropsPost) => {
           </Heading>
           <Text color={"gray.500"}>{post.body}</Text>
         </Stack>
+
+        {post.photo && <Image src={post.photo} />}
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
             src={post.author.avatar}

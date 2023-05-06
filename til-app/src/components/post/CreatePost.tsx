@@ -44,15 +44,22 @@ interface PropsCreatePost {
   refresh: KeyedMutator<any>;
 }
 
+export interface FormValues { 
+  title: string;
+  body: string;
+  photo: null | File;
+}
+
 const CreatePost = ({ refresh }: PropsCreatePost) => {
   const { user } = getUserData();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const [inputError, setInputError] = useState<InputError>();
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormValues>({
     title: "",
     body: "",
+    photo: null
   });
 
   // handle change of inputs by his name
@@ -73,10 +80,13 @@ const CreatePost = ({ refresh }: PropsCreatePost) => {
       author: user.id,
       title: form.title,
       body: form.body,
+      photo: form.photo
     };
 
     axiosService
-      .post("/post/", data)
+      .post("/post/", data, {
+        headers: { "content-type": "multipart/form-data" },
+      })
       .then(() => {
         setForm({
           title: "",
@@ -206,6 +216,19 @@ const CreatePost = ({ refresh }: PropsCreatePost) => {
                 <FormErrorMessage>
                   {inputError?.body && inputError?.body[0]}
                 </FormErrorMessage>
+              </FormControl>
+
+              <FormControl mt={2}>
+                <FormLabel>Upload a Photo</FormLabel>
+                <input 
+                  type="file"
+                  name="photo"
+                  onChange={(event) => {
+                    if (event.target.files) {
+                      setForm({...form, photo: event.target.files[0]});
+                    }
+                  }}
+                />
               </FormControl>
             </Form>
           </ModalBody>

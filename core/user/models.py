@@ -30,30 +30,7 @@ class UserManager(BaseUserManager, AbstractManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, password, **kwargs):
-        """
-        Creates a new superuser object with the given username, email, and password.
-        Raises a TypeError if any of those fields are None.
-        """
-        if password is None:
-            raise TypeError("superusers must have a password.")
-        if username is None:
-            raise TypeError("superusers must have a username.")
-        if email is None:
-            raise TypeError("superusers must have a email.")
-
-        user = self.create_user(username, email, password, **kwargs)
-        user.is_superuser = True
-        user.is_staff = True
-        user.save(using=self._db)
-        return user
-
-
 class User(AbstractModel, AbstractBaseUser):
-    """
-    Custom user model for the application.
-    """
-
     username = models.CharField(db_index=True, max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -67,14 +44,8 @@ class User(AbstractModel, AbstractBaseUser):
     objects = UserManager()
 
     def __str__(self):
-        """
-        Returns a string representation of the User object.
-        """
         return f"{self.email}"
 
     @property
     def name(self):
-        """
-        Returns the full name of the User object.
-        """
         return f"{self.first_name} {self.last_name}"

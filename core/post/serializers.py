@@ -9,6 +9,7 @@ from core.post.models import Post
 
 
 class PostSerializer(AbstractSerializer):
+    photo = serializers.ImageField(required=False)
     author = serializers.SlugRelatedField(
         slug_field="public_id", queryset=User.objects.all()
     )
@@ -38,4 +39,5 @@ class PostSerializer(AbstractSerializer):
             "body",
             "created",
             "updated",
+            "photo"
         ]
