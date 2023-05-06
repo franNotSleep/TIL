@@ -26,7 +26,8 @@ class UserViewSet(viewsets.ModelViewSet):
         """
         Retrieve a user instance by its public ID.
 
-        Ensure that the current user has permission to access the user instance.
+        Ensure that the current user has permission to 
+        access the user instance.
         """
         obj = User.objects.get_object_by_public_id(self.kwargs["pk"])
         self.check_object_permissions(self.request, obj)
