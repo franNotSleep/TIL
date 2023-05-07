@@ -111,6 +111,7 @@ const EditPost = ({ isOpen, onClose, post, refresh }: PropsEditPost) => {
                     if (event.target.files)
                       setForm({...form, photo: event.target.files[0]})
                   }}
+                  accept="image/jpeg, image/png"
                   />
               </FormControl>
             </Form>

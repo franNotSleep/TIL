@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     "core.auth",
     "core.user",
     "core.post",
-    "core.reinforce",
     "core.comment",
 ]
 

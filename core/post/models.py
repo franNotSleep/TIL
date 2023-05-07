@@ -1,6 +1,6 @@
 from django.db import models
 from core.abstract.models import AbstractManager, AbstractModel
-from core.reinforce.models import upload_to
+from core.user.models import upload_to
 
 
 class PostManager(AbstractManager):

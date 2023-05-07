@@ -7,13 +7,13 @@ from rest_framework import serializers
 
 class UserSerializer(AbstractSerializer):
     posts_count = serializers.SerializerMethodField()
-    reinforces_count = serializers.SerializerMethodField()
+    comments_count = serializers.SerializerMethodField()
 
     def get_posts_count(self, instance):
         return instance.post_set.all().count()
 
-    def get_reinforces_count(self, instance):
-        return instance.reinforce_set.all().count()
+    def get_comments_count(self, instance):
+        return instance.comment_set.all().count()
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -32,7 +32,7 @@ class UserSerializer(AbstractSerializer):
             "last_name",
             "first_name",
             "avatar",
-            "reinforces_count",
+            "comments_count",
             "posts_count",
             "email",
             "created",

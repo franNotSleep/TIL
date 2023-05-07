@@ -30,9 +30,8 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, link: "/" },
   { name: "Profile", icon: FiUser, link: "/profile/" },
-  { name: "Explore", icon: FiCompass, link: "#" },
+  { name: "Search", icon: FiCompass, link: "#" },
   { name: "Favourites", icon: FiStar, link: "#" },
-  { name: "Settings", icon: FiSettings, link: "#" },
 ];
 
 interface SidebarProps {

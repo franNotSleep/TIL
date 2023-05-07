@@ -76,9 +76,9 @@ const ProfileCard = ({ userProfile }: ProfileCardProps) => {
               </Text>
             </Stack>
             <Stack spacing={0} align={'center'}>
-              <Text fontWeight={600}>{KorM(userProfile.reinforces_count)}</Text>
+              <Text fontWeight={600}>{KorM(userProfile.comments_count)}</Text>
               <Text fontSize={'sm'} color={'gray.500'}>
-                Reinforces 
+                Comments 
               </Text>
             </Stack>
           </Stack>

@@ -18,13 +18,10 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaHammer, FaComment } from "react-icons/fa";
 import { KeyedMutator } from "swr";
 
-import axiosService, { User } from "../../helpers/axios";
 import { getUserData } from "../../hooks/user.actions";
 import Comment from "../comment/Comment";
-import EditPost from "./EditPost";
 import { format } from "timeago.js";
 import PostMenu from "./PostMenu";
-import Reinforce from "../reinforce/Reinforce";
 
 export interface IPost {
   id: string;
@@ -46,8 +43,9 @@ const Post = ({ post, refresh }: PropsPost) => {
     return (
     <Center py={6}>
       <Box
-        maxW={"4xl"}
+        maxW={"xl"}
         w={"full"}
+
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         rounded={"md"}
@@ -94,7 +92,6 @@ const Post = ({ post, refresh }: PropsPost) => {
           </Stack>
         </Stack>
         <Stack mt={8} direction={"row"} spacing={4}>
-          <Reinforce currentPost={post} refresh={refresh} />
           <Comment currentPost={post} refresh={refresh} />
         </Stack>
       </Box>

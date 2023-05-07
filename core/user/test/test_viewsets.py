@@ -25,7 +25,7 @@ class TestUserViewSet:
         assert response.data["id"] == user.public_id.hex
         assert response.data["username"] == user.username
         assert response.data["posts_count"] == 0 
-        assert response.data["reinforces_count"] == 0
+        assert response.data["comments_count"] == 0
 
     def test_create(self, client, user):
         """

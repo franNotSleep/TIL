@@ -13,7 +13,7 @@ export interface User {
   created: Date;
   avatar: string;
   posts_count: number;
-  reinforces_count: number;
+  comments_count: number;
 }
 
 export interface AuthResponse {

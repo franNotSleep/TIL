@@ -228,6 +228,7 @@ const CreatePost = ({ refresh }: PropsCreatePost) => {
                       setForm({...form, photo: event.target.files[0]});
                     }
                   }}
+                  accept="image/jpeg, image/png"
                 />
               </FormControl>
             </Form>

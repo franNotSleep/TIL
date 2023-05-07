@@ -65,7 +65,6 @@ export const useUserActions = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         toast({
           title: "Error",
           description: "Invalid credentials",
@@ -132,7 +131,6 @@ function updateUser(
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   const { user, refresh, access } = getUserData();
-  console.log([...data.entries()]);
   return axiosService
     .patch(`/user/${user.id}/`, data, {
       headers: { "content-type": "multipart/form-data" },
@@ -151,7 +149,6 @@ function updateUser(
       setLoading(false);
     })
     .catch((err) => {
-      console.log(err)
       let errMsg = err.message.detail ? err.message.detail : err.message;
       toast({
         title: "Error",
