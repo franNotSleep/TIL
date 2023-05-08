@@ -11,6 +11,7 @@ const Home = () => {
   const posts = useSWR("/post", fetcher, {
     refreshInterval: 20000,
   });
+
   return (
     <Grid templateColumns="repeat(6, 1fr)">
       <GridItem colSpan={{ base: 6, lg: 4, xl: 5 }}>

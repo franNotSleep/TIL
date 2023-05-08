@@ -15,8 +15,12 @@ export interface InputError {
   title: string[];
 }
 
-interface RegisterUser extends Omit<User, "id"> {
+interface RegisterUser {
+  username: string;
+  email: string;
   password: string;
+  first_name: string;
+  last_name: string;
 }
 
 /**
@@ -126,56 +130,55 @@ export const useUserActions = () => {
       });
   }
 
-function updateUser(
-  data: FormData,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-) {
-  const { user, refresh, access } = getUserData();
-  return axiosService
-    .patch(`/user/${user.id}/`, data, {
-      headers: { "content-type": "multipart/form-data" },
-    })
-    .then((res) => {
-      setUserData({access, refresh, user: res.data});
+  function updateUser(
+    data: FormData,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) {
+    const { user, refresh, access } = getUserData();
+    return axiosService
+      .patch(`/user/${user.id}/`, data, {
+        headers: { "content-type": "multipart/form-data" },
+      })
+      .then((res) => {
+        setUserData({ access, refresh, user: res.data });
 
-      toast({
-        title: "Success",
-        description: "Successfully updated",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
+        toast({
+          title: "Success",
+          description: "Successfully updated",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+        setLoading(false);
+      })
+      .catch((err) => {
+        let errMsg = err.message.detail ? err.message.detail : err.message;
+        toast({
+          title: "Error",
+          description: errMsg,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+        setLoading(false);
       });
-      setLoading(false);
-    })
-    .catch((err) => {
-      let errMsg = err.message.detail ? err.message.detail : err.message;
-      toast({
-        title: "Error",
-        description: errMsg,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-      setLoading(false);
+  }
+
+  function logout(toastSuccessIcon: React.ReactNode) {
+    localStorage.removeItem("auth");
+    toast({
+      title: "Success",
+      description: "Successfully logged out",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+      icon: toastSuccessIcon,
     });
-}
-
-  
-function logout(toastSuccessIcon: React.ReactNode) {
-  localStorage.removeItem("auth");
-  toast({
-    title: "Success",
-    description: "Successfully logged out",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-    position: "top",
-    icon: toastSuccessIcon,
-  });
-  navigate("/login/");
-}
+    navigate("/login/");
+  }
 };
 
 export function getUserData() {

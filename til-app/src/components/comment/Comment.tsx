@@ -5,16 +5,13 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
   Spinner,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
 import { FaComment } from "react-icons/fa";
 import Comments from "./Comments";
-import Post, { IPost } from "../post/Post";
+import { IPost } from "../post/Post";
 import useSWR, { KeyedMutator } from "swr";
 import CreateComment from "./CreateComment";
 import { User, fetcher } from "../../helpers/axios";

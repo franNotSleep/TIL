@@ -10,9 +10,9 @@ import {
   useColorModeValue,
   useDisclosure,
   useToast,
-  Image
+  Image,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaHammer, FaComment } from "react-icons/fa";
@@ -22,6 +22,7 @@ import { getUserData } from "../../hooks/user.actions";
 import Comment from "../comment/Comment";
 import { format } from "timeago.js";
 import PostMenu from "./PostMenu";
+import { User } from "../../helpers/axios";
 
 export interface IPost {
   id: string;
@@ -40,12 +41,11 @@ interface PropsPost {
 
 const Post = ({ post, refresh }: PropsPost) => {
   const { user } = getUserData();
-    return (
+  return (
     <Center py={6}>
       <Box
         maxW={"xl"}
         w={"full"}
-
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         rounded={"md"}
@@ -83,9 +83,7 @@ const Post = ({ post, refresh }: PropsPost) => {
 
         {post.photo && <Image src={post.photo} />}
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
-          <Avatar
-            src={post.author.avatar}
-          />
+          <Avatar src={post.author.avatar} />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
             <Text fontWeight={600}>{post.author.username}</Text>
             <Text color={"gray.500"}>{format(post.created)}</Text>
