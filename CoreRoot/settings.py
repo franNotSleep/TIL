@@ -20,18 +20,17 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+ENV = os.environ["ENV"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False if ENV == "PROD" else True
 
-ALLOWED_HOSTS = []
-
+print("ALLOWED HOST")
+print(os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(","))
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",")
 
 # Application definition
 
@@ -86,18 +85,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "CoreRoot.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# Database # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ["DB_NAME"],
-        "USER": os.environ["DB_USERNAME"],
-        "PASSWORD": os.environ["DB_PASSWORD"],
-        "HOST": "localhost",
-        "PORT": 5432,
+        "NAME": os.getenv("DATABASE_NAME", "tildb"),
+        "USER": os.getenv("DATABASE_USER", "fran"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+        "HOST": os.environ.get("DATABASE_HOST", "localhost"),
+        "PORT": os.getenv("DATABASE_PORT", "5432"),
     }
 }
 
