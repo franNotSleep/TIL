@@ -24,7 +24,7 @@ then
 	    exit 0
 fi
 
-git pull origin main;
+git pull origin master;
 
 docker compose up -d --build
 
