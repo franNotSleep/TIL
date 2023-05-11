@@ -26,7 +26,7 @@ export interface AuthResponse {
  * Create an instance of axios with default configurations.
  */
 const axiosService = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "http://til-api.eastus.cloudapp.azure.com/api",
   headers: {
     "Content-Type": "application/json",
   },

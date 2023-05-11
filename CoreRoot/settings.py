@@ -28,8 +28,6 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if ENV == "PROD" else True
 
-print("ALLOWED HOST")
-print(os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(","))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",")
 
 # Application definition

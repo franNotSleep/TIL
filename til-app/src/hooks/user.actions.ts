@@ -31,7 +31,7 @@ export const useUserActions = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const baseURL = "http://localhost:8000/api/auth";
+  const baseURL = "http://til-api.eastus.cloudapp.azure.com/api/auth";
   return {
     login,
     register,
