@@ -36,4 +36,3 @@ jobs:
         script: |
           cd ~/
           ./docker-deploy.sh
-          ls -al
