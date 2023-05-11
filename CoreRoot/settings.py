@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
 }
 
 MEDIA_ROOT = BASE_DIR / "mediafiles"
-MEDIA_URL = "/media/"
+MEDIA_URL = "/mediafiles/"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
