@@ -35,4 +35,5 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd ~/
+          ./docker-deploy.sh
           ls -al
