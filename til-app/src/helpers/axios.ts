@@ -26,7 +26,7 @@ export interface AuthResponse {
  * Create an instance of axios with default configurations.
  */
 const axiosService = axios.create({
-  baseURL: "http://til-api.eastus.cloudapp.azure.com/api",
+  baseURL: "https://til-api.eastus.cloudapp.azure.com/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -65,7 +65,7 @@ const refreshAuthLogic = async (failedRequest: AxiosError) => {
       "/auth/refresh/",
       { refresh },
       {
-        baseURL: "http://til-api.eastus.cloudapp.azure.com/api",
+        baseURL: "https://til-api.eastus.cloudapp.azure.com/api",
       }
     )
     .then((res) => {
