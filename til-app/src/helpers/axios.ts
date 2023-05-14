@@ -44,7 +44,6 @@ axiosService.interceptors.request.use((config) => {
 
   if (access) {
     config.headers.Authorization = `Bearer ${access}`;
-    // config.headers.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxNjkzMzc3LCJpYXQiOjE2ODE2OTMwNzcsImp0aSI6ImEwMzdhZDBlZWQ5MjRhZGY4MDM4Y2E3OGQwNjZlZGE5IiwidXNlcl9pZCI6NDh9.68MFYgsq2HzMack-f9lSSqfzdy-WAA8M079mko_s8vs`;
   }
 
   return config;
@@ -66,7 +65,7 @@ const refreshAuthLogic = async (failedRequest: AxiosError) => {
       "/auth/refresh/",
       { refresh },
       {
-        baseURL: "https://localhost:8000/api",
+        baseURL: "https://til-api.eastus.cloudapp.azure.com/api",
       }
     )
     .then((res) => {

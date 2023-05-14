@@ -91,6 +91,7 @@ const CreatePost = ({ refresh }: PropsCreatePost) => {
         setForm({
           title: "",
           body: "",
+          photo: null
         });
         onClose();
         toast({
