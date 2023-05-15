@@ -159,9 +159,8 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 MEDIA_URL = "/mediafiles/"
 
 CORS_ALLOWED_ORIGINS = [
+    "https://brave-tree-02e69f210.3.azurestaticapps.net",
     "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://brave-tree-02e69f210.3.azurestaticapps.net"
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
