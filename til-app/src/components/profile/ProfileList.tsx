@@ -41,7 +41,7 @@ const ProfileList = () => {
 interface PropsProfileItem {
   user: User;
 }
-const ProfileItem = ({ user }: PropsProfileItem) => {
+export const ProfileItem = ({ user }: PropsProfileItem) => {
   const navigate = useNavigate();
 
   const handleNavigateToProfile = () => {
