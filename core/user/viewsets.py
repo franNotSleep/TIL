@@ -2,12 +2,17 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework import filters
+
 from core.user.serializers import UserSerializer
 from core.user.models import User
 from core.permission.permission import AuthorOrReadOnly
 
+from core.abstract.viewsets import AbstractViewSet
 
-class UserViewSet(viewsets.ModelViewSet):
+from django_filters.rest_framework import DjangoFilterBackend
+
+class UserViewSet(AbstractViewSet):
     """
     API endpoint that allows users to be viewed, edited, and deleted.
     """
@@ -15,6 +20,11 @@ class UserViewSet(viewsets.ModelViewSet):
     http_method_names = ("patch", "get")
     permission_classes = (AuthorOrReadOnly, IsAuthenticated)
     serializer_class = UserSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    #filterset_fields = ["username", "email"]
+    #search_fields = ["username", "email"]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username', 'email']
 
     def get_queryset(self):
         """

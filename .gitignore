@@ -7,3 +7,5 @@ __pycache__/*
 *.pytest_cache
 data/
 init-letsencrypt.sh
+mediafiles/
+
