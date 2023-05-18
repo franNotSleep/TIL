@@ -23,6 +23,7 @@ import Comment from "../comment/Comment";
 import { format } from "timeago.js";
 import PostMenu from "./PostMenu";
 import { User } from "../../helpers/axios";
+import { useNavigate } from "react-router-dom";
 
 export interface IPost {
   id: string;
@@ -40,7 +41,13 @@ interface PropsPost {
 }
 
 const Post = ({ post, refresh }: PropsPost) => {
+  const navigate = useNavigate();
   const { user } = getUserData();
+
+  const handleNavigateToProfile = () => {
+    navigate(`/profile/${post.author.id}`);
+  };
+
   return (
     <Center py={6}>
       <Box
@@ -83,7 +90,11 @@ const Post = ({ post, refresh }: PropsPost) => {
 
         {post.photo && <Image src={post.photo} />}
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
-          <Avatar src={post.author.avatar} />
+          <Avatar 
+            src={post.author.avatar}
+            onClick={handleNavigateToProfile}
+            cursor={"pointer"}
+          />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
             <Text fontWeight={600}>{post.author.username}</Text>
             <Text color={"gray.500"}>{format(post.created)}</Text>
