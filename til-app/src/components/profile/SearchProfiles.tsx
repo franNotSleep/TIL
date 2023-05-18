@@ -27,9 +27,14 @@ interface Response {
 
 interface SearchProfilesProps {
   isOpen: boolean;
-  onClose: () => void;
+  onCloseSearch: () => void;
+  onCloseSidebar: () => void;
 }
-const SearchProfiles = ({ isOpen, onClose }: SearchProfilesProps) => {
+const SearchProfiles = ({
+  isOpen,
+  onCloseSearch,
+  onCloseSidebar,
+}: SearchProfilesProps) => {
   const [users, setUsers] = useState<User[]>();
 
   // Fetch Users by Query
@@ -41,7 +46,7 @@ const SearchProfiles = ({ isOpen, onClose }: SearchProfilesProps) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onCloseSearch}>
         <ModalOverlay />
         <ModalContent>
           <ModalBody>
@@ -60,7 +65,13 @@ const SearchProfiles = ({ isOpen, onClose }: SearchProfilesProps) => {
 
           {users?.length && (
             <ModalFooter>
-              <VStack w={"100%"} onClick={onClose}>
+              <VStack
+                w={"100%"}
+                onClick={() => {
+                  onCloseSearch();
+                  onCloseSidebar();
+                }}
+              >
                 {users.map((user) => (
                   <>
                     <ProfileItem key={user.id} user={user} />

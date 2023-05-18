@@ -32,7 +32,6 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, link: "/" },
   { name: "Profile", icon: FiUser, link: "/profile/" },
-  { name: "Most Comments", icon: FiStar, link: "#" },
 ];
 
 interface SidebarProps {
@@ -41,7 +40,7 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-function Sidebar({ isOpen, onOpen, onClose }: SidebarProps) {
+const Sidebar = ({ isOpen, onOpen, onClose }: SidebarProps) => {
   return (
     <>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size={"full"}>
@@ -56,7 +55,7 @@ function Sidebar({ isOpen, onOpen, onClose }: SidebarProps) {
       </Box>
     </>
   );
-}
+};
 
 interface SidebarContentProps {
   onClose: () => void;
@@ -88,8 +87,13 @@ const SiderbarContent = ({ onClose }: SidebarContentProps) => {
           Search Users
         </NavLink>
       </ListItem>
-      <SearchProfiles isOpen={isOpen} onClose={onCloseSearch} />
+      <SearchProfiles
+        isOpen={isOpen}
+        onCloseSearch={onCloseSearch}
+        onCloseSidebar={onClose}
+      />
     </List>
   );
 };
+
 export default Sidebar;
