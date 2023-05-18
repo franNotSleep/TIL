@@ -12,6 +12,7 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Spacer,
 } from "@chakra-ui/react";
 import { FcPrivacy } from "react-icons/fc";
 import { NavLink } from "react-router-dom";
@@ -44,6 +45,7 @@ const Navbar = ({ isOpen, onOpen }: NavbarProps) => {
           <Heading>TIL</Heading>
         </NavLink>
       </Box>
+      <Spacer />
 
       <Menu>
         <MenuButton
@@ -53,18 +55,12 @@ const Navbar = ({ isOpen, onOpen }: NavbarProps) => {
           cursor={"pointer"}
           minW={0}
         >
-          <Avatar
-            size={"sm"}
-            src={user.avatar}
-          />
+          <Avatar size={"sm"} src={user.avatar} />
         </MenuButton>
         <MenuList alignItems={"center"}>
           <br />
           <Center>
-            <Avatar
-              size={"2xl"}
-              src={user.avatar}
-            />
+            <Avatar size={"2xl"} src={user.avatar} />
           </Center>
           <br />
           <Center>

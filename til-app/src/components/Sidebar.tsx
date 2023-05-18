@@ -8,6 +8,7 @@ import {
   List,
   ListIcon,
   ListItem,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import { IconType } from "react-icons";
@@ -21,6 +22,7 @@ import {
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import { getUserData } from "../hooks/user.actions";
+import SearchProfiles from "./profile/SearchProfiles";
 
 interface LinkItemProps {
   name: string;
@@ -30,8 +32,6 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: "Home", icon: FiHome, link: "/" },
   { name: "Profile", icon: FiUser, link: "/profile/" },
-  { name: "Search", icon: FiCompass, link: "#" },
-  { name: "Favourites", icon: FiStar, link: "#" },
 ];
 
 interface SidebarProps {
@@ -40,7 +40,7 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-function Sidebar({ isOpen, onOpen, onClose }: SidebarProps) {
+const Sidebar = ({ isOpen, onOpen, onClose }: SidebarProps) => {
   return (
     <>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size={"full"}>
@@ -55,7 +55,7 @@ function Sidebar({ isOpen, onOpen, onClose }: SidebarProps) {
       </Box>
     </>
   );
-}
+};
 
 interface SidebarContentProps {
   onClose: () => void;
@@ -63,6 +63,7 @@ interface SidebarContentProps {
 
 const SiderbarContent = ({ onClose }: SidebarContentProps) => {
   const { user } = getUserData();
+  const { isOpen, onOpen, onClose: onCloseSearch } = useDisclosure();
 
   return (
     <List spacing={5} fontSize="1.0em" p={4}>
@@ -80,7 +81,19 @@ const SiderbarContent = ({ onClose }: SidebarContentProps) => {
           </NavLink>
         </ListItem>
       ))}
+      <ListItem>
+        <NavLink to={"#"} onClick={onOpen}>
+          <ListIcon as={FiCompass} color="gray.500" />
+          Search Users
+        </NavLink>
+      </ListItem>
+      <SearchProfiles
+        isOpen={isOpen}
+        onCloseSearch={onCloseSearch}
+        onCloseSidebar={onClose}
+      />
     </List>
   );
 };
+
 export default Sidebar;

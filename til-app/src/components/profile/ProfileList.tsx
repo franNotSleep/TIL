@@ -1,4 +1,13 @@
-import { Avatar, Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { ViewIcon } from "@chakra-ui/icons";
+import { 
+  Avatar,
+  Box,
+  Divider,
+  Flex,
+  Text,
+  Button, 
+  HStack,
+  VStack} from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
@@ -11,18 +20,18 @@ const ProfileList = () => {
   return (
     <Box
       display={{ base: "none", lg: "flex" }}
-      height="500px"
+      height="600px"
+      overflowY={"auto"}
       my={5}
+      w={300}
       flexDirection={"column"}
       borderRadius={"md"}
       p={5}
-      maxW={"md"}
       borderWidth={"1px"}
     >
       {users.data?.results.map((user: User) => (
         <>
           <ProfileItem user={user} key={user.id} />
-          <Divider mb={5} />
         </>
       ))}
     </Box>
@@ -32,29 +41,31 @@ const ProfileList = () => {
 interface PropsProfileItem {
   user: User;
 }
-const ProfileItem = ({ user }: PropsProfileItem) => {
+export const ProfileItem = ({ user }: PropsProfileItem) => {
   const navigate = useNavigate();
 
   const handleNavigateToProfile = () => {
     navigate(`/profile/${user.id}`);
   };
   return (
-    <Flex
-      onClick={handleNavigateToProfile}
-      cursor={"pointer"}
-      justifyContent={"flex-start"}
-      borderBottomColor={"gray.500"}
-      borderBottomWidth={"2px"}
-      borderRadius={"full"}
-      borderWidth={"2px"}
-      overflow={"hidden"}
-    >
-      <Avatar src={user.avatar}/>
-      <Box ml={1}>
-        <Text>{user.username}</Text>
-        <Text color={"CaptionText"}>{user.email}</Text>
-      </Box>
-    </Flex>
+    <Box 
+      mb={3}
+      w={"100%"}
+      borderTopWidth={4}
+      borderTopRadius={"md"}
+      borderTopColor={"gray.200"}>
+
+      <HStack justifyContent={"space-around"}>
+        <Avatar src={user.avatar}/>
+        <Box>
+          <Text textAlign={'left'}>{user.username}</Text>
+          <Button 
+            w={150} 
+            leftIcon={<ViewIcon />}
+            onClick={handleNavigateToProfile}>View</Button>
+        </Box>
+      </HStack>
+    </Box>
   );
 };
 
