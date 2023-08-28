@@ -88,8 +88,8 @@ const Post = ({ post, refresh }: PropsPost) => {
           <Text color={"gray.500"}>{post.body}</Text>
         </Stack>
 
-        {post.photo && <Image boxSize={{ md: "300px" lg: "400px" }}  objectFit={"cover"} src={post.photo} />}
-        <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
+	{post.photo && <Image boxSize={{ md: "300px", lg: "400px" }}  objectFit={"cover"} src={post.photo} />}
+	  <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar 
             src={post.author.avatar}
             onClick={handleNavigateToProfile}
