@@ -49,7 +49,7 @@ const Post = ({ post, refresh }: PropsPost) => {
   };
 
   return (
-    <Center py={6}>
+    <Center py={4}>
       <Box
         maxW={"xl"}
         w={"full"}
@@ -88,7 +88,10 @@ const Post = ({ post, refresh }: PropsPost) => {
           <Text color={"gray.500"}>{post.body}</Text>
         </Stack>
 
-	{post.photo && <Image boxSize={{ md: "300px", lg: "400px" }}  objectFit={"cover"} src={post.photo} />}
+<Box sx={{ display: "flex", justifyContent: "center", p: 2, borderRadius: "20px"  }}>
+
+	{post.photo && <Image width={"100%"} height={"100%"} src={post.photo} />}
+</Box>
 	  <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar 
             src={post.author.avatar}
@@ -100,7 +103,7 @@ const Post = ({ post, refresh }: PropsPost) => {
             <Text color={"gray.500"}>{format(post.created)}</Text>
           </Stack>
         </Stack>
-        <Stack mt={8} direction={"row"} spacing={4}>
+        <Stack mt={4} direction={"row"} spacing={4}>
           <Comment currentPost={post} refresh={refresh} />
         </Stack>
       </Box>
