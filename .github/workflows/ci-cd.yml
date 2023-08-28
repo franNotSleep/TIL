@@ -14,11 +14,11 @@ jobs:
         echo "${{ secrets.ENV_SECRETS }}" >> .env
     - name: Building Docker containers
       run: |
-        docker-compose up -d --build
-        docker-compose logs
+        sudo docker-compose up -d --build
+        sudo docker-compose logs
     - name: Running Tests inside Docker containers
       run: |
-        docker-compose exec -T api pytest
+        sudo docker-compose exec -T api pytest
 
   deploy:
     name: Deploying on VM via SSH
